@@ -15,16 +15,16 @@
 - [x] Redis:  
 	  注入: IRedisBasketRepository  
 
-项目命名规范：  
-- [x] 类名: 驼峰，首字母大写
-      case: UserService, UserHelper
-- [x] 方法/属性: 驼峰，首字母大写
-      case: GetUser, ListUser
-- [x] 字段: 驼峰，首字母小写
-      case: userService, userHelper
-- [x] 枚举: 驼峰，首字母大写，必须以Enum结尾
-      case: UserStatusEnum
-	  枚举项: 驼峰，首字母大写
-      case: Enable, Disable
-- [x] 常量: 驼峰，首字母大写(部分常量使用下划线间隔)
-      case: ConsulConfigName, RedisConfigName, Claim_UserID, Claim_UserName
+项目命名规范:  
+- [x] 类名: 驼峰，首字母大写  
+      case: UserService, UserHelper  
+- [x] 方法/属性: 驼峰，首字母大写  
+      case: GetUser, ListUser  
+- [x] 字段: 驼峰，首字母小写  
+      case: userService, userHelper  
+- [x] 枚举: 驼峰，首字母大写，必须以Enum结尾  
+      case: UserStatusEnum  
+	  枚举项: 驼峰，首字母大写  
+      case: Enable, Disable  
+- [x] 常量: 驼峰，首字母大写(部分常量使用下划线间隔)  
+      case: ConsulConfigName, RedisConfigName, Claim_UserID, Claim_UserName  
