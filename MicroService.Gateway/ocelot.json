@@ -1,0 +1,27 @@
+{
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/system/{url}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "DownstreamPathTemplate": "/api/{url}",
+      "DownstreamScheme": "http",
+      "ServiceName": "SystemManage",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "UseServiceDiscovery": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://192.168.33.20:10002",
+    "ServiceDiscoveryProvider": {
+      "Host": "192.168.32.63",
+      "Port": 8501,
+      "Type": "Consul"
+    }
+  }
+}
