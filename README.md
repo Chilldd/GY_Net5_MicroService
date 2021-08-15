@@ -1,7 +1,8 @@
 ﻿
 功能模块:  
 - [x] 服务注册(Consul):  
-	  IServiceRegistryManage
+	  服务启动自动注册，服务关闭时自动下线
+	  注册，下线，获取服务: IServiceRegistryManage
 - [x] Log:  
 	  Log4net: 记录物理日志  
 	  ELK: 待实现  
@@ -19,7 +20,7 @@
 - [x] 全局异常处理:  
 	  采用Filter拦截  
 - [x] 实体映射(AutoMapper):  
-	  未实现  
+	  项目下新建一个Mappers文件夹，继承Profile，在构造函数里创建映射关系即可
 
 项目命名规范:  
 - [x] 类名: 驼峰，首字母大写  

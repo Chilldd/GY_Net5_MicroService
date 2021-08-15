@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MicroService.Common;
-using MicroService.Core.AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
@@ -17,8 +16,7 @@ namespace MicroService.Core
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.AddAutoMapper(typeof(AutoMapperConfig));
-            AutoMapperConfig.RegisterMappings();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
     }
 }
