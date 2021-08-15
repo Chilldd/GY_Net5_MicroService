@@ -16,6 +16,7 @@ namespace MicroService.Core.Consul
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             services.Configure<ConsulConfig>(configuration.GetSection(ServiceConstants.ConsulConfigName));
+            services.AddSingleton<IServiceRegistryManage, ServiceRegistryManage>();
         }
     }
 }

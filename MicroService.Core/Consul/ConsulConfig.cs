@@ -7,6 +7,10 @@ namespace MicroService.Core
 {
     public class ConsulConfig
     {
+        /// <summary>
+        /// consul id
+        /// </summary>
+        public string ID { get; set; }
 
         /// <summary>
         /// consul ip
@@ -19,9 +23,9 @@ namespace MicroService.Core
         public int ConsulPort { get; set; }
 
         /// <summary>
-        /// 应用ip
+        /// 应用地址
         /// </summary>
-        public string IP { get; set; }
+        public string Address { get; set; }
 
         /// <summary>
         /// 应用端口

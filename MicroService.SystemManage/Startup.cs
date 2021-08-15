@@ -3,6 +3,7 @@ using MicroService.Common;
 using MicroService.Core;
 using MicroService.Core.Authorization;
 using MicroService.Core.Consul;
+using MicroService.Core.ExceptionHandler;
 using MicroService.Core.IocManage;
 using MicroService.Core.ORM;
 using MicroService.Core.Redis;
@@ -15,6 +16,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using SqlSugar;
 using System;
 using System.Collections.Generic;
@@ -37,14 +40,29 @@ namespace MicroService.SystemManage
         public void ConfigureServices(IServiceCollection services)
         {
             _services = services;
-            services.AddControllers();
+            services.AddControllers(e =>
+                    {
+                        e.Filters.Add(typeof(GlobalExceptionsFilter));
+                    })
+                    .AddNewtonsoftJson(options =>
+                    {
+                        //忽略循环引用
+                        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                        //不使用驼峰样式的key
+                        options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                        //设置时间格式
+                        options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+                        //设置本地时间而非UTC时间
+                        options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
+                    });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MicroService.SystemManage", Version = "v1" });
             });
 
-            services.AddRedisSetup(Configuration);
             services.AddCommonSetup(Configuration);
+            services.AddAutoMapperSetup();
+            services.AddRedisSetup(Configuration);
             services.AddSqlsugarSetup(Configuration);
             services.AddConsulSetup(Configuration);
             services.AddAuthenticationJwtSetup(Configuration);

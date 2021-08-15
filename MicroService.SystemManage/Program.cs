@@ -23,8 +23,7 @@ namespace MicroService.SystemManage
                 .UseServiceProviderFactory(new AutofacServiceProviderFactory())
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseUrls("http://*:10001")
-                              .UseStartup<Startup>()
+                    webBuilder.UseStartup<Startup>()
                               .ConfigureLogging((hostingContext, builder) =>
                               {
                                   // 1.过滤掉系统默认的一些日志

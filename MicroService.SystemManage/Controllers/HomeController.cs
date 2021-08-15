@@ -1,4 +1,5 @@
-﻿using MicroService.SystemManage.Service;
+﻿using MicroService.Core.Consul;
+using MicroService.SystemManage.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -11,15 +12,17 @@ using System.Threading.Tasks;
 
 namespace MicroService.SystemManage.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class HomeController : ControllerBase
     {
         private readonly ILogger<HomeController> logger;
+        private readonly IServiceRegistryManage service;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IServiceRegistryManage service)
         {
             this.logger = logger;
+            this.service = service;
         }
 
         [HttpGet("get")]
@@ -27,6 +30,12 @@ namespace MicroService.SystemManage.Controllers
         {
             logger.LogInformation($"【{DateTime.Now}】 MicroService.SystemManage Get2");
             return "this is SystemManage service";
+        }
+
+        [HttpGet("getService")]
+        public async Task<string> GetService()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(await service.GetServices("SystemManage"));
         }
 
         [HttpGet("health")]
