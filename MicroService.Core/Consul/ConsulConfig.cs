@@ -28,6 +28,11 @@ namespace MicroService.Core
         public string Address { get; set; }
 
         /// <summary>
+        /// 应用IP
+        /// </summary>
+        public string IP { get; set; }
+
+        /// <summary>
         /// 应用端口
         /// </summary>
         public int Port { get; set; }

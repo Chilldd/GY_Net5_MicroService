@@ -27,7 +27,6 @@ namespace MicroService.Gateway
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>()
-                              .UseUrls("http://192.168.32.24:10003")
                               .ConfigureLogging((hostingContext, builder) =>
                               {
                                   // 1.过滤掉系统默认的一些日志

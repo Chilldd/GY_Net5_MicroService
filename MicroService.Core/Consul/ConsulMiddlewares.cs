@@ -7,6 +7,9 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,9 +31,10 @@ namespace MicroService.Core.Consul
 
             //获取服务地址
             var features = app.Properties["server.Features"] as FeatureCollection;
-            var address = features.Get<IServerAddressesFeature>().Addresses.First();
-            options.Value.Address = address;
+            var address = features.Get<IServerAddressesFeature>().Addresses?.FirstOrDefault() ?? "";
             var uri = new Uri(address);
+            options.Value.Address = $"{uri.Scheme}://{uri.Host}:{uri.Port}";
+            options.Value.IP = uri.Host;
             options.Value.Port = uri.Port;
 
             IServiceRegistryManage service = app.ApplicationServices.GetService(typeof(IServiceRegistryManage)) as IServiceRegistryManage;

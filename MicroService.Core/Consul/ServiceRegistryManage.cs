@@ -63,16 +63,25 @@ namespace MicroService.Core.Consul
                 c.Address = new Uri(consulAddress);
             });
 
+            /**
+             * 应用程序再向Consul注册时，Address不要带Scheme
+             * case: 
+             *      yes: 192.168.1.7
+             *       no: http://192.168.1.7 
+             * https://ocelot.readthedocs.io/en/latest/features/servicediscovery.html#consul
+             * https://github.com/ThreeMammals/Ocelot/issues/617
+             */
             var registration = new AgentServiceRegistration()
             {
                 ID = config.ID,//服务实例唯一标识
                 Name = config.ServiceName,//服务名
-                Address = config.Address, //服务地址
+                Address = config.IP, //服务地址
                 Port = config.Port,//服务端口
                 Check = new AgentServiceCheck()
                 {
                     DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(5),//服务停止5s后注销服务
                     Interval = TimeSpan.FromSeconds(config.Interval),//健康检查时间间隔
+                    //HTTP = $"{config.Address}:{config.Port}{config.HealthCheck}",//健康检查地址
                     HTTP = $"{config.Address}{config.HealthCheck}",//健康检查地址
                     Timeout = TimeSpan.FromSeconds(config.Timeout)//超时时间
                 }

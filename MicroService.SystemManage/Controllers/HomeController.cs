@@ -28,8 +28,8 @@ namespace MicroService.SystemManage.Controllers
         [HttpGet("get")]
         public string Get()
         {
-            logger.LogInformation($"【{DateTime.Now}】 MicroService.SystemManage Get2");
-            return "this is SystemManage service";
+            logger.LogInformation($"【{DateTime.Now}】 MicroService.SystemManage Get1");
+            return "this is SystemManage service1";
         }
 
         [HttpGet("getService")]
