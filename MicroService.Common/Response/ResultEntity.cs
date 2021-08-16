@@ -47,7 +47,11 @@ namespace MicroService
         Unauthorized = 401,
         [Description("授权失败")]
         Forbidden = 403,
+        [Description("超时")]
+        TimeOut = 408,
         [Description("后台系统报错")]
-        Error = 500
+        Error = 500,
+        [Description("服务熔断")]
+        Circuit = 504
     }
 }

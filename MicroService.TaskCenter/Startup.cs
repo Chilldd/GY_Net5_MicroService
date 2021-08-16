@@ -1,3 +1,4 @@
+using MicroService.Core.Consul;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -31,10 +32,12 @@ namespace MicroService.TaskCenter
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MicroService.TaskCenter", Version = "v1" });
             });
+
+            services.AddConsulSetup(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime)
         {
             if (env.IsDevelopment())
             {
@@ -42,6 +45,8 @@ namespace MicroService.TaskCenter
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MicroService.TaskCenter v1"));
             }
+
+            app.UseConsulMildd(lifetime);
 
             app.UseRouting();
 

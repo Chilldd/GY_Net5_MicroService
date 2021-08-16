@@ -4,6 +4,7 @@ using MicroService.Core;
 using MicroService.Core.Authorization;
 using MicroService.Core.Consul;
 using MicroService.Core.ExceptionHandler;
+using MicroService.Core.HttpHelper;
 using MicroService.Core.IocManage;
 using MicroService.Core.ORM;
 using MicroService.Core.Redis;
@@ -61,6 +62,8 @@ namespace MicroService.SystemManage
             });
 
             services.AddCommonSetup(Configuration);
+
+            services.AddPollyHttpClient("", null);
             services.AddAutoMapperSetup();
             services.AddRedisSetup(Configuration);
             services.AddSqlsugarSetup(Configuration);
