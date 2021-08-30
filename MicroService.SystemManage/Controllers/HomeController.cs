@@ -6,6 +6,7 @@ using MicroService.SystemManage.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SqlSugar;
@@ -27,18 +28,21 @@ namespace MicroService.SystemManage.Controllers
         private readonly IHttpClientFactory httpClientFactory;
         private readonly IUserHelper userHelper;
         private readonly IOptions<AuthenticationConfig> options;
+        private readonly IConfiguration configuration;
 
         public HomeController(ILogger<HomeController> logger,
                               IServiceRegistryManage service,
                               IHttpClientFactory httpClientFactory,
                               IUserHelper userHelper,
-                              IOptions<AuthenticationConfig> options)
+                              IOptions<AuthenticationConfig> options,
+                              IConfiguration configuration)
         {
             this.logger = logger;
             this.service = service;
             this.httpClientFactory = httpClientFactory;
             this.userHelper = userHelper;
             this.options = options;
+            this.configuration = configuration;
         }
 
         [HttpGet("testAuth")]
@@ -52,7 +56,8 @@ namespace MicroService.SystemManage.Controllers
         public string Get()
         {
             logger.LogInformation($"【{DateTime.Now}】 MicroService.SystemManage Get1");
-            return "this is SystemManage service1";
+            Console.WriteLine(Appsettings.app("Test"));
+            return $"【{configuration.GetValue<string>("Test")}】this is SystemManage service1";
         }
 
         [HttpGet("getService")]

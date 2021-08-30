@@ -16,7 +16,7 @@ namespace MicroService.Common
 
         public Appsettings(string contentPath)
         {
-            string Path = "appsettings.json";
+            string Path = $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json";
 
             Configuration = new ConfigurationBuilder()
                                 .SetBasePath(contentPath)
