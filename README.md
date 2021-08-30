@@ -1,4 +1,4 @@
-﻿## 功能模块:  
+﻿﻿## 功能模块:  
 - [x] 服务注册(Consul):  
 	  服务启动自动注册，服务关闭时自动下线
 	  注册，下线，获取服务: IServiceRegistryManage
@@ -50,3 +50,46 @@
       case: Enable, Disable  
 - [x] 常量: 驼峰，首字母大写(部分常量使用下划线间隔)  
       case: ConsulConfigName, RedisConfigName, Claim_UserID, Claim_UserName  
+
+
+
+## 模块截图:  
+
+
+<h3>配置中心：</h3>
+
+1. 文件夹：
+
+![image-20210830182410193](C:\Users\gy\AppData\Roaming\Typora\typora-user-images\image-20210830182410193.png)
+
+2. 配置文件
+
+![image-20210830182219121](C:\Users\gy\AppData\Roaming\Typora\typora-user-images\image-20210830182219121.png)
+
+3. 配置详情
+
+![image-20210830182352335](C:\Users\gy\AppData\Roaming\Typora\typora-user-images\image-20210830182352335.png)
+
+
+<hr />
+
+
+<h3>注册中心</h3>
+
+1. 所有实例
+
+![image-20210830182609304](C:\Users\gy\AppData\Roaming\Typora\typora-user-images\image-20210830182609304.png)
+
+2. 节点详情
+
+![image-20210830182729509](C:\Users\gy\AppData\Roaming\Typora\typora-user-images\image-20210830182729509.png)
+
+
+<hr />
+
+
+<h3>网关</h3>
+
+1. 聚合swagger文档
+
+![image-20210830182856554](C:\Users\gy\AppData\Roaming\Typora\typora-user-images\image-20210830182856554.png)
