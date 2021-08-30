@@ -43,7 +43,7 @@ namespace MicroService.SystemManage
             _services = services;
             services.AddControllers(e =>
                     {
-                        e.Filters.Add(typeof(GlobalExceptionsFilter));
+                        //e.Filters.Add(typeof(GlobalExceptionsFilter));
                     })
                     .AddNewtonsoftJson(options =>
                     {

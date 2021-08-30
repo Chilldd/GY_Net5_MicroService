@@ -1,5 +1,7 @@
 ﻿using MicroService.Common;
+using MicroService.Core.Authorization;
 using MicroService.Core.Consul;
+using MicroService.Core.JwtHelper;
 using MicroService.SystemManage.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MicroService.SystemManage.Controllers
@@ -21,14 +24,17 @@ namespace MicroService.SystemManage.Controllers
         private readonly ILogger<HomeController> logger;
         private readonly IServiceRegistryManage service;
         private readonly IHttpClientFactory httpClientFactory;
+        private readonly IOptions<AuthenticationConfig> options;
 
         public HomeController(ILogger<HomeController> logger,
                               IServiceRegistryManage service,
-                              IHttpClientFactory httpClientFactory)
+                              IHttpClientFactory httpClientFactory,
+                              IOptions<AuthenticationConfig> options)
         {
             this.logger = logger;
             this.service = service;
             this.httpClientFactory = httpClientFactory;
+            this.options = options;
         }
 
         [HttpGet("get")]
@@ -42,6 +48,24 @@ namespace MicroService.SystemManage.Controllers
         public async Task<string> GetService()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(await service.GetServices("SystemManage"));
+        }
+
+        [HttpGet("error")]
+        public string Error()
+        {
+            Thread.Sleep(2000);
+            string a = null;
+            return a.ToString();
+        }
+
+        [HttpGet("getToken")]
+        public string GetToken()
+        {
+            return JwtHelper.IssueJwt(options.Value, new UserInfo
+                                                      {
+                                                          UserID = 1,
+                                                          UserName = "admin"
+                                                      });
         }
 
         [HttpGet("getTaskData")]
