@@ -46,7 +46,7 @@ namespace MicroService.SystemManage
             _services = services;
             services.AddControllers(e =>
                     {
-                        //e.Filters.Add(typeof(GlobalExceptionsFilter));
+                        e.Filters.Add(typeof(GlobalExceptionsFilter));
                     })
                     .AddNewtonsoftJson(options =>
                     {
@@ -68,31 +68,7 @@ namespace MicroService.SystemManage
             services.AddRedisSetup(Configuration);
             services.AddSqlsugarSetup(Configuration);
             services.AddConsulSetup(Configuration);
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MicroService.SystemManage", Version = "v1" });
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
-
-
-                // 开启加权小锁
-                c.OperationFilter<AddResponseHeadersFilter>();
-                c.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
-
-                // 在header中添加token，传递到后台
-                c.OperationFilter<SecurityRequirementsOperationFilter>();
-
-                // Jwt Bearer 认证，必须是 oauth2
-                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
-                {
-                    Description = "JWT授权(数据将在请求头中进行传输) 直接在下框中输入Bearer {token}（注意两者之间是一个空格）\"",
-                    Name = SystemConstants.Authorization,
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey
-                });
-            });
+            services.AddSwaggerSetup();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
