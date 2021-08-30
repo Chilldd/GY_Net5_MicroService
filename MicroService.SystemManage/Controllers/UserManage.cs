@@ -5,6 +5,7 @@ using MicroService.Core.ORM;
 using MicroService.SystemManage.Model.Entity;
 using MicroService.SystemManage.Model.VO;
 using MicroService.SystemManage.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
@@ -44,6 +45,7 @@ namespace MicroService.SystemManage.Controllers
             return new ResultEntity<UserInfoVO>(ResultEnum.Success, res);
         }
 
+        [Authorize]
         [HttpPost("get")]
         public virtual async Task<UserEntity> Get(int id)
         {

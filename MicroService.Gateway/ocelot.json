@@ -1,6 +1,16 @@
 {
   "Routes": [
     {
+      "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/swagger/v1/swagger.json",
+      "UpstreamHttpMethod": [ "Get" ],
+      "ServiceName": "SystemManage",
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      }
+    },
+    {
       "UpstreamPathTemplate": "/system/{url}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "DownstreamPathTemplate": "/api/{url}",

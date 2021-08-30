@@ -20,9 +20,12 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using SqlSugar;
+using Swashbuckle.AspNetCore.Filters;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace MicroService.SystemManage
@@ -56,19 +59,40 @@ namespace MicroService.SystemManage
                         //设置本地时间而非UTC时间
                         options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
                     });
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MicroService.SystemManage", Version = "v1" });
-            });
 
             services.AddCommonSetup(Configuration);
+            services.AddAuthenticationJwtSetup(Configuration);
 
             services.AddPollyHttpClient("", null);
             services.AddAutoMapperSetup();
             services.AddRedisSetup(Configuration);
             services.AddSqlsugarSetup(Configuration);
             services.AddConsulSetup(Configuration);
-            services.AddAuthenticationJwtSetup(Configuration);
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MicroService.SystemManage", Version = "v1" });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+
+
+                // 开启加权小锁
+                c.OperationFilter<AddResponseHeadersFilter>();
+                c.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
+
+                // 在header中添加token，传递到后台
+                c.OperationFilter<SecurityRequirementsOperationFilter>();
+
+                // Jwt Bearer 认证，必须是 oauth2
+                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Description = "JWT授权(数据将在请求头中进行传输) 直接在下框中输入Bearer {token}（注意两者之间是一个空格）\"",
+                    Name = SystemConstants.Authorization,
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -96,7 +120,6 @@ namespace MicroService.SystemManage
                 endpoints.MapControllers();
             });
 
-            app.UseGlobalQueryFilterMildd(client);
         }
 
         /// <summary>

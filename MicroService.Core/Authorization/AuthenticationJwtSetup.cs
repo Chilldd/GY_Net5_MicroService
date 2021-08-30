@@ -47,8 +47,10 @@ namespace MicroService.Core.Authorization
                 RequireExpirationTime = true,
             };
 
-            //开启认证
-            services.AddAuthentication(o =>
+            services.AddAuthorization(o =>
+                    {
+                    })
+                    .AddAuthentication(o =>
                     {
                         // 开启Bearer认证
                         o.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -57,10 +59,10 @@ namespace MicroService.Core.Authorization
                         o.DefaultForbidScheme = nameof(CustomizeAuthenticationHandler);
                     })
                     .AddJwtBearer(o =>
-                      {
-                         // 添加JwtBearer服务
-                         o.TokenValidationParameters = tokenValidationParameters;
-                      })
+                    {
+                        // 添加JwtBearer服务
+                        o.TokenValidationParameters = tokenValidationParameters;
+                    })
                     .AddScheme<AuthenticationSchemeOptions, CustomizeAuthenticationHandler>(nameof(CustomizeAuthenticationHandler), o => { });
 
             services.AddScoped<IAuthorizationHandler, CustomizeAuthorizationHandler>();

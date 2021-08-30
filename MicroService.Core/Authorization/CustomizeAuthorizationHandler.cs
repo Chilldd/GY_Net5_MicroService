@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
@@ -14,12 +15,15 @@ namespace MicroService.Core.Authorization
     /// </summary>
     public class CustomizeAuthorizationHandler : AuthorizationHandler<IAuthorizationRequirement>
     {
+        private readonly IAuthenticationSchemeProvider schemes;
         private readonly ILogger<CustomizeAuthorizationHandler> log;
         private readonly HttpContext httpContext;
 
-        public CustomizeAuthorizationHandler(ILogger<CustomizeAuthorizationHandler> log,
+        public CustomizeAuthorizationHandler(IAuthenticationSchemeProvider schemes,
+                                             ILogger<CustomizeAuthorizationHandler> log,
                                              IHttpContextAccessor httpContext)
         {
+            this.schemes = schemes;
             this.log = log;
             this.httpContext = httpContext.HttpContext;
         }
@@ -30,14 +34,24 @@ namespace MicroService.Core.Authorization
         /// <param name="context"></param>
         /// <param name="requirement"></param>
         /// <returns></returns>
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, IAuthorizationRequirement requirement)
+        protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, IAuthorizationRequirement requirement)
         {
-            log.LogInformation("*****************************");
-            //TODO: 自己处理业务 
-            //context.Fail();
-
-            context.Succeed(requirement);
-            return Task.CompletedTask;
+            try
+            {
+                //是否经过认证
+                var isAuthenticated = context.User.Identity.IsAuthenticated;
+                if (isAuthenticated)
+                {
+                    //TODO: 自己实现授权逻辑
+                    context.Succeed(requirement);
+                }
+                else
+                    context.Fail();
+            }
+            catch (Exception ex)
+            {
+                context.Fail();
+            }
         }
     }
 }

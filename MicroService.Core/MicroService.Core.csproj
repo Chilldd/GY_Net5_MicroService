@@ -20,6 +20,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.9" />
     <PackageReference Include="SqlSugarCore" Version="5.0.3.7" />
     <PackageReference Include="StackExchange.Redis" Version="2.2.62" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>

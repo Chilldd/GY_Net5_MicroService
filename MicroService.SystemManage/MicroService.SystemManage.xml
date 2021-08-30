@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MicroService.SystemManage</name>
+    </assembly>
+    <members>
+        <member name="T:MicroService.SystemManage.Controllers.UserManage">
+            <summary>
+            用户管理
+            </summary>
+        </member>
+        <member name="T:MicroService.SystemManage.GlobalQueryFilterMildd">
+            <summary>
+            全局查询过滤(TODO没生效)
+            </summary>
+        </member>
+        <member name="T:MicroService.SystemManage.Model.Entity.RoleEntity">
+            <summary>
+            角色表
+            </summary>
+        </member>
+        <member name="T:MicroService.SystemManage.Model.Entity.UserEntity">
+            <summary>
+            用户表
+            </summary>
+        </member>
+        <member name="M:MicroService.SystemManage.Startup.ConfigureContainer(Autofac.ContainerBuilder)">
+            <summary>
+            集成Autofac(IOC)
+            </summary>
+            <param name="builder"></param>
+        </member>
+    </members>
+</doc>

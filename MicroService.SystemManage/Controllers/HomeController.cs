@@ -3,6 +3,7 @@ using MicroService.Core.Authorization;
 using MicroService.Core.Consul;
 using MicroService.Core.JwtHelper;
 using MicroService.SystemManage.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -24,17 +25,27 @@ namespace MicroService.SystemManage.Controllers
         private readonly ILogger<HomeController> logger;
         private readonly IServiceRegistryManage service;
         private readonly IHttpClientFactory httpClientFactory;
+        private readonly IUserHelper userHelper;
         private readonly IOptions<AuthenticationConfig> options;
 
         public HomeController(ILogger<HomeController> logger,
                               IServiceRegistryManage service,
                               IHttpClientFactory httpClientFactory,
+                              IUserHelper userHelper,
                               IOptions<AuthenticationConfig> options)
         {
             this.logger = logger;
             this.service = service;
             this.httpClientFactory = httpClientFactory;
+            this.userHelper = userHelper;
             this.options = options;
+        }
+
+        [HttpGet("testAuth")]
+        [Authorize]
+        public string TestAuth()
+        {
+            return userHelper.GetUserID();
         }
 
         [HttpGet("get")]

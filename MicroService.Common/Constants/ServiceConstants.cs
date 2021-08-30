@@ -6,12 +6,19 @@ using System.Threading.Tasks;
 
 namespace MicroService
 {
+    public static class SystemConstants
+    {
+        public static readonly string Bearer = "Bearer";
+        public static readonly string Authorization = "Authorization";
+        public static string PolicyName = "Permission";
+    }
+
     public static class ServiceConstants
     {
         public static readonly string DB = "DB";
         public static readonly string ConsulConfigName = "Server:Consul";
         public static readonly string RedisConfigName = "Server:Redis";
-        public static readonly string AuthenticationConfigName = "Application:Audience"; 
+        public static readonly string AuthenticationConfigName = "Application:Audience";
         public static readonly string ApplicationName = "Application:ApplicationName";
 
         public static readonly string ApplicationAOPLog = "Application:AOP:Log";
@@ -24,6 +31,7 @@ namespace MicroService
         public static readonly int Delete = 0;
         public static readonly int NotDelete = 1;
     }
+
     public class ClaimConstants
     {
         public static readonly string Claim_UserID = "UserID";
