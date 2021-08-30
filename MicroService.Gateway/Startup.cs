@@ -1,4 +1,5 @@
 using MicroService.Common;
+using MicroService.Core;
 using MicroService.Core.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -16,7 +17,9 @@ using Ocelot.Provider.Consul;
 using Ocelot.Provider.Polly;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,14 +38,11 @@ namespace MicroService.Gateway
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MicroService.SystemManage", Version = "v1" });
-            });
+            services.AddSwaggerSetup();
 
             services.AddCommonSetup(Configuration);
             services.AddAuthenticationJwtSetup(Configuration);
-            
+
             services.AddOcelot(Configuration)
                     .AddConsul()
                     .AddPolly();
@@ -55,7 +55,12 @@ namespace MicroService.Gateway
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MicroService.Gateway v1"));
+                app.UseSwaggerUI(c =>
+                {
+                    //网关统一聚合所有微服务的swagger文档地址，方便访问
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "MicroService.Gateway v1");
+                    c.SwaggerEndpoint("/system/swagger/v1/swagger.json", "MicroService.SystemManage v1");
+                });
             }
 
             app.UseRouting();
