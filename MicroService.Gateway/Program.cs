@@ -1,3 +1,4 @@
+using MicroService.Core;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -35,6 +36,10 @@ namespace MicroService.Gateway
 
                                   // Ä¬ÈÏlog4net.confg
                                   builder.AddLog4Net(Path.Combine(Directory.GetCurrentDirectory(), "Log4net.config"));
+                              })
+                              .ConfigureAppConfiguration((host, config) =>
+                              {
+                                  ConfigCenterSetup.AddAppsettingsJson(host, config);
                               });
                 });
     }

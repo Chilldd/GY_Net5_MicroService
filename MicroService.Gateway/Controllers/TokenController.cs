@@ -4,6 +4,7 @@ using MicroService.Core.JwtHelper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -23,15 +24,24 @@ namespace MicroService.Gateway.Controllers
     {
         private readonly AuthenticationConfig options;
         private readonly IUserHelper userHelper;
+        private readonly IConfiguration configuration;
         private readonly ILogger<TokenController> log;
 
         public TokenController(IOptions<AuthenticationConfig> options, 
                                IUserHelper userHelper,
+                               IConfiguration configuration,
                                ILogger<TokenController> log)
         {
             this.options = options?.Value;
             this.userHelper = userHelper;
+            this.configuration = configuration;
             this.log = log;
+        }
+
+        [HttpGet("get")]
+        public string Get()
+        {
+            return $"【{configuration.GetValue<string>("Test")}】this is SystemManage service1";
         }
 
         [HttpPost("getToken")]
