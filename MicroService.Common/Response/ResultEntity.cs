@@ -30,6 +30,13 @@ namespace MicroService
             this.Success = @enum == ResultEnum.Success;
         }
 
+        public ResultEntity(ResultEnum @enum, string msg)
+        {
+            this.Status = (int)@enum;
+            this.Msg = msg;
+            this.Success = @enum == ResultEnum.Success;
+        }
+
         public ResultEntity(ResultEnum @enum, T data)
         {
             this.Status = (int)@enum;

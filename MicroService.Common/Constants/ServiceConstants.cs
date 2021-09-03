@@ -17,6 +17,7 @@ namespace MicroService
     {
         public static readonly string DB = "DB";
         public static readonly string ConsulConfigName = "Server:Consul";
+        public static readonly string PollyConfigName = "Server:Polly";
         public static readonly string RedisConfigName = "Server:Redis";
         public static readonly string AuthenticationConfigName = "Application:Audience";
         public static readonly string ApplicationName = "Application:ApplicationName";

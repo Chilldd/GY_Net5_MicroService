@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MicroService.Core.HttpHelper
+namespace MicroService.Core
 {
     public class PollyHttpClientConfig
     {
@@ -32,6 +32,6 @@ namespace MicroService.Core.HttpHelper
         /// <summary>
         /// 降级处理(将异常消息封装成为正常消息返回，然后进行响应处理，例如：系统正在繁忙，请稍后处理.....)
         /// </summary>
-        public HttpResponseMessage httpResponseMessage { set; get; }
+        public string httpResponseMessage { set; get; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MicroService.Common;
+using MicroService.Core;
 using MicroService.Core.Authorization;
 using MicroService.Core.Consul;
 using MicroService.Core.JwtHelper;
@@ -28,6 +29,7 @@ namespace MicroService.SystemManage.Controllers
         private readonly IHttpClientFactory httpClientFactory;
         private readonly IUserHelper userHelper;
         private readonly IOptions<AuthenticationConfig> options;
+        private readonly IOptions<PollyHttpClientConfig> pollyOptions;
         private readonly IConfiguration configuration;
 
         public HomeController(ILogger<HomeController> logger,
@@ -35,6 +37,7 @@ namespace MicroService.SystemManage.Controllers
                               IHttpClientFactory httpClientFactory,
                               IUserHelper userHelper,
                               IOptions<AuthenticationConfig> options,
+                              IOptions<PollyHttpClientConfig> pollyOptions,
                               IConfiguration configuration)
         {
             this.logger = logger;
@@ -42,6 +45,7 @@ namespace MicroService.SystemManage.Controllers
             this.httpClientFactory = httpClientFactory;
             this.userHelper = userHelper;
             this.options = options;
+            this.pollyOptions = pollyOptions;
             this.configuration = configuration;
         }
 
@@ -90,7 +94,7 @@ namespace MicroService.SystemManage.Controllers
             string json = string.Empty;
             try
             {
-                HttpClient httpClient = httpClientFactory.CreateClient("SystemManage1");
+                HttpClient httpClient = httpClientFactory.CreateClient("MicroService.SystemManage");
                 HttpResponseMessage response = await httpClient.GetAsync("http://192.168.1.7:10004/WeatherForecast");
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     json = await response.Content.ReadAsStringAsync();

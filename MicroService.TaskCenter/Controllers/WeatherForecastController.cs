@@ -28,8 +28,6 @@ namespace MicroService.TaskCenter.Controllers
         public IActionResult Get()
         {
             Console.WriteLine("Get------------------");
-            string a = null;
-            a.ToString();
             return Ok();
         }
 
