@@ -18,6 +18,8 @@ namespace MicroService
         public static readonly string DB = "DB";
         public static readonly string ConsulConfigName = "Server:Consul";
         public static readonly string PollyConfigName = "Server:Polly";
+        public static readonly string RabbitMQConfigName = "Server:RabbitMQ";
+        public static readonly string EventBusConfigName = "Server:EventBus";
         public static readonly string RedisConfigName = "Server:Redis";
         public static readonly string AuthenticationConfigName = "Application:Audience";
         public static readonly string ApplicationName = "Application:ApplicationName";
@@ -25,6 +27,9 @@ namespace MicroService
         public static readonly string ApplicationAOPLog = "Application:AOP:Log";
         public static readonly string ApplicationSqlLog = "Application:AOP:SqlLog";
         public static readonly string ApplicationTran = "Application:AOP:Tran";
+
+        public static readonly string ConfigCenterFileName = "configcenter.json";
+        
     }
 
     public static class SqlConstants
@@ -37,5 +42,10 @@ namespace MicroService
     {
         public static readonly string Claim_UserID = "UserID";
         public static readonly string Claim_UserName = "UserName";
+    }
+
+    public class EventBusConstants
+    {
+        public const string SystemTest = "GY.SystemManage.Test";
     }
 }

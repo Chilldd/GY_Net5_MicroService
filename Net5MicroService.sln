@@ -19,6 +19,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroService.TaskCenter", "MicroService.TaskCenter\MicroService.TaskCenter.csproj", "{C3806B26-2B15-45DE-ADB6-ACA72823BF1A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{9B80E9A9-2ADC-4AE4-A849-79D6EDCEBC1C}"
+	ProjectSection(SolutionItems) = preProject
+		img\image-20210830182100219.png = img\image-20210830182100219.png
+		img\image-20210830182204574.png = img\image-20210830182204574.png
+		img\image-20210830182219121.png = img\image-20210830182219121.png
+		img\image-20210830182235936.png = img\image-20210830182235936.png
+		img\image-20210830182352335.png = img\image-20210830182352335.png
+		img\image-20210830182410193.png = img\image-20210830182410193.png
+		img\image-20210830182609304.png = img\image-20210830182609304.png
+		img\image-20210830182646610.png = img\image-20210830182646610.png
+		img\image-20210830182649940.png = img\image-20210830182649940.png
+		img\image-20210830182729509.png = img\image-20210830182729509.png
+		img\image-20210830182856554.png = img\image-20210830182856554.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +63,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9B80E9A9-2ADC-4AE4-A849-79D6EDCEBC1C} = {A8400137-F0FD-4720-A56B-1490F2F294C5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {82EE2B17-F44C-4D8A-B091-3F9C0B35CF1B}

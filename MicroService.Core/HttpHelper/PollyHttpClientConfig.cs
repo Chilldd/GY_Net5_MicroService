@@ -32,6 +32,16 @@ namespace MicroService.Core
         /// <summary>
         /// 降级处理(将异常消息封装成为正常消息返回，然后进行响应处理，例如：系统正在繁忙，请稍后处理.....)
         /// </summary>
-        public string httpResponseMessage { set; get; }
+        public string HttpResponseMessage { set; get; }
+
+        /// <summary>
+        /// 请求最大并发数
+        /// </summary>
+        public int MaxParallelization { set; get; }
+
+        /// <summary>
+        /// 请求排队最大次数
+        /// </summary>
+        public int MaxQueuingActions { set; get; }
     }
 }

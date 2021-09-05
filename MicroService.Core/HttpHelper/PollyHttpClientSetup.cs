@@ -38,10 +38,10 @@ namespace MicroService.Core
             services.AddHttpClient(name)
                     //异常降级(对熔断器异常降级)
                     .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<BrokenCircuitException>()
-                                                                 .FallbackAsync(GetFallBackResponseObject(ResultEnum.Circuit, section.GetValue<string>("httpResponseMessage"))))
+                                                                 .FallbackAsync(GetFallBackResponseObject(ResultEnum.Circuit, section.GetValue<string>("HttpResponseMessage"))))
                     //异常降级(对超时请求异常降级)
                     .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<TimeoutRejectedException>()
-                                                                 .FallbackAsync(GetFallBackResponseObject(ResultEnum.TimeOut, section.GetValue<string>("httpResponseMessage"))))
+                                                                 .FallbackAsync(GetFallBackResponseObject(ResultEnum.TimeOut, section.GetValue<string>("HttpResponseMessage"))))
                     /**
                      * 熔断(对所有异常进行熔断)
                      * 1: 当异常请求数量到达熔断次数时，触发。此时熔断器处于打开状态，后续所有请求直接降级
@@ -81,7 +81,7 @@ namespace MicroService.Core
                                                                                  log.Error($"服务重试: 当前次数: 【{num}】, 重试原因: 【{res.Exception.Message}】");
                                                                              }))
                     //资源隔离(参数1: 最大并发线程, 参数2: 等待线程)
-                    .AddPolicyHandler(Policy.BulkheadAsync<HttpResponseMessage>(10, 1000));
+                    .AddPolicyHandler(Policy.BulkheadAsync<HttpResponseMessage>(section.GetValue<int>("MaxParallelization"), section.GetValue<int>("MaxQueuingActions")));
 
 
             return services;

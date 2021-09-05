@@ -68,6 +68,7 @@ namespace MicroService.SystemManage
             services.AddSqlsugarSetup(Configuration);
             services.AddConsulSetup(Configuration);
             services.AddSwaggerSetup();
+            services.AddCAPEventBusClient(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

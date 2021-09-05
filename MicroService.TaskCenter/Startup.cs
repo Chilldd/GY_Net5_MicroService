@@ -1,3 +1,4 @@
+using MicroService.Core;
 using MicroService.Core.Consul;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +35,7 @@ namespace MicroService.TaskCenter
             });
 
             services.AddConsulSetup(Configuration);
+            services.AddCAPEventBusClient(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

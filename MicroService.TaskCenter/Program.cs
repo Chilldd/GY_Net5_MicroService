@@ -1,3 +1,4 @@
+using MicroService.Core;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -20,7 +21,13 @@ namespace MicroService.TaskCenter
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
-}
+                    webBuilder.UseStartup<Startup>()
+                              .ConfigureAppConfiguration((hostingContext, config) =>
+                              {
+                                  //ÃÌº”appsettings≈‰÷√Œƒº˛
+                                  ConfigCenterSetup.AddAppsettingsJson(hostingContext, config);
+                              }); ;
+                });                                               
+    }                                                             
+}                                                                 
+                                                                  

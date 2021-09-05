@@ -1,4 +1,5 @@
-﻿using MicroService.Common;
+﻿using DotNetCore.CAP;
+using MicroService.Common;
 using MicroService.Core;
 using MicroService.Core.Authorization;
 using MicroService.Core.Consul;
@@ -31,6 +32,7 @@ namespace MicroService.SystemManage.Controllers
         private readonly IOptions<AuthenticationConfig> options;
         private readonly IOptions<PollyHttpClientConfig> pollyOptions;
         private readonly IConfiguration configuration;
+        private readonly ICapPublisher capPublisher;
 
         public HomeController(ILogger<HomeController> logger,
                               IServiceRegistryManage service,
@@ -38,7 +40,8 @@ namespace MicroService.SystemManage.Controllers
                               IUserHelper userHelper,
                               IOptions<AuthenticationConfig> options,
                               IOptions<PollyHttpClientConfig> pollyOptions,
-                              IConfiguration configuration)
+                              IConfiguration configuration,
+                              ICapPublisher capPublisher)
         {
             this.logger = logger;
             this.service = service;
@@ -47,6 +50,7 @@ namespace MicroService.SystemManage.Controllers
             this.options = options;
             this.pollyOptions = pollyOptions;
             this.configuration = configuration;
+            this.capPublisher = capPublisher;
         }
 
         [HttpGet("testAuth")]
@@ -82,10 +86,10 @@ namespace MicroService.SystemManage.Controllers
         public string GetToken()
         {
             return JwtHelper.IssueJwt(options.Value, new UserInfo
-                                                      {
-                                                          UserID = 1,
-                                                          UserName = "admin"
-                                                      });
+            {
+                UserID = 1,
+                UserName = "admin"
+            });
         }
 
         [HttpGet("getTaskData")]
@@ -106,6 +110,12 @@ namespace MicroService.SystemManage.Controllers
                 ConsoleHelper.WriteErrorLine("服务调用失败, ex: " + ex.Message);
             }
             return json;
+        }
+
+        [HttpGet("testPushMessage")]
+        public void TestPushMessage()
+        {
+            capPublisher.Publish(EventBusConstants.SystemTest, $"发送时间: 【{DateTime.Now}】");
         }
 
         [HttpGet("health")]
