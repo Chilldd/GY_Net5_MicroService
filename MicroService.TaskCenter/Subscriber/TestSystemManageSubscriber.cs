@@ -11,6 +11,7 @@ namespace MicroService.TaskCenter.Subscriber
         [CapSubscribe(name: EventBusConstants.SystemTest)]
         public void CheckReceivedMessage(string msg)
         {
+            throw new Exception("1");
             Console.WriteLine(msg);
         }
     }

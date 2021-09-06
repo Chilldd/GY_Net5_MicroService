@@ -43,6 +43,7 @@ namespace MicroService.Core
                 });
 
                 //失败后的重试次数，默认50次；在FailedRetryInterval默认60秒的情况下，即默认重试50*60秒(50分钟)之后放弃失败重试
+                //重试规则：前三次立即重试，后续根据设置时间进行重试
                 e.FailedRetryCount = section.GetValue<int>("FailedRetryCount");
 
                 //失败后的重试间隔，默认60秒
