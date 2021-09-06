@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="logs\" />
     <Folder Include="Log\" />
     <Folder Include="Repository\Impl\" />
   </ItemGroup>
