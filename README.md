@@ -1,4 +1,4 @@
-﻿﻿## 功能模块:  
+﻿﻿﻿## 功能模块:  
 - [x] 服务注册(Consul):  
 	  服务启动自动注册，服务关闭时自动下线
 	  注册，下线，获取服务: IServiceRegistryManage
@@ -68,15 +68,15 @@
 
 1. 文件夹：
 
-![image-20210830182410193](C:\Users\gy\AppData\Roaming\Typora\typora-user-images\image-20210830182410193.png)
+<img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/image-20210830182410193.png?raw=true" width="100%" />
 
 2. 配置文件
 
-![image-20210830182219121](C:\Users\gy\AppData\Roaming\Typora\typora-user-images\image-20210830182219121.png)
+<img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/image-20210830182204574.png?raw=true" width="100%" />
 
 3. 配置详情
 
-![image-20210830182352335](C:\Users\gy\AppData\Roaming\Typora\typora-user-images\image-20210830182352335.png)
+<img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/image-20210830182352335.png?raw=true" width="100%" />
 
 
 <hr />
@@ -86,11 +86,11 @@
 
 1. 所有实例
 
-![image-20210830182609304](C:\Users\gy\AppData\Roaming\Typora\typora-user-images\image-20210830182609304.png)
+<img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/image-20210830182609304.png?raw=true" width="100%" />
 
 2. 节点详情
 
-![image-20210830182729509](C:\Users\gy\AppData\Roaming\Typora\typora-user-images\image-20210830182729509.png)
+<img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/image-20210830182646610.png?raw=true" width="100%" />
 
 
 <hr />
@@ -100,4 +100,4 @@
 
 1. 聚合swagger文档
 
-![image-20210830182856554](C:\Users\gy\AppData\Roaming\Typora\typora-user-images\image-20210830182856554.png)
+<img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/image-20210830182856554.png?raw=true" width="100%" />
