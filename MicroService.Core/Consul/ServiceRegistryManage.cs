@@ -67,7 +67,7 @@ namespace MicroService.Core.Consul
              * 应用程序再向Consul注册时，Address不要带Scheme
              * case: 
              *      yes: 192.168.1.7
-             *       no: http://192.168.1.7 
+             *       no: http://192.168.1.2 
              * https://ocelot.readthedocs.io/en/latest/features/servicediscovery.html#consul
              * https://github.com/ThreeMammals/Ocelot/issues/617
              */

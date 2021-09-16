@@ -57,6 +57,7 @@ namespace MicroService.SystemManage.Controllers
         [Authorize]
         public string TestAuth()
         {
+            logger.LogInformation($"【{DateTime.Now}】 MicroService.SystemManage TestAuth{userHelper.GetUserID()}");
             return userHelper.GetUserID();
         }
 
@@ -99,15 +100,32 @@ namespace MicroService.SystemManage.Controllers
             try
             {
                 HttpClient httpClient = httpClientFactory.CreateClient("MicroService.SystemManage");
-                HttpResponseMessage response = await httpClient.GetAsync("http://192.168.1.7:10004/WeatherForecast");
+                HttpResponseMessage response = await httpClient.GetAsync("http://192.168.1.2:10004/WeatherForecast");
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     json = await response.Content.ReadAsStringAsync();
                 else
-                    ConsoleHelper.WriteErrorLine("服务调用报错, msg: " + await response.Content.ReadAsStringAsync());
+                    logger.LogInformation("服务调用报错, msg: " + await response.Content.ReadAsStringAsync());
+
+                logger.LogInformation("服务调用成功");
             }
             catch (Exception ex)
             {
-                ConsoleHelper.WriteErrorLine("服务调用失败, ex: " + ex.Message);
+                logger.LogInformation("服务调用失败, ex: " + ex.Message);
+            }
+            try
+            {
+                HttpClient httpClient = httpClientFactory.CreateClient("MicroService.SystemManage");
+                HttpResponseMessage response = await httpClient.GetAsync("http://192.168.1.2:10004/WeatherForecast");
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    json = await response.Content.ReadAsStringAsync();
+                else
+                    logger.LogInformation("服务调用报错, msg: " + await response.Content.ReadAsStringAsync());
+
+                logger.LogInformation("服务调用成功2");
+            }
+            catch (Exception ex)
+            {
+                logger.LogInformation("服务调用失败, ex: " + ex.Message);
             }
             return json;
         }

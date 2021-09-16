@@ -39,7 +39,7 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://192.168.1.7:10003/",
+    "BaseUrl": "http://192.168.1.2:10003/",
     "ServiceDiscoveryProvider": {
       "Host": "192.168.1.130",
       "Port": 8501,
