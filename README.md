@@ -1,4 +1,4 @@
-﻿此项目是我在学习微服务时写的练手项目，目前是最基本的实现，后续有时间会不断更新。
+﻿﻿此项目是我在学习微服务时写的练手项目，目前是最基本的实现，后续有时间会不断更新。
 
 
 
@@ -114,18 +114,24 @@
 
 1. 仪表盘
 
-<img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/00061c3133114592b68dd5ec3a682eca.png?raw=true" width="100%" />
+<img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/00061c3133114592b68dd5ec3a682eca.jpg?raw=true" width="100%" />
 
 <img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/9965f3ccb1ef453885c3698e9887e1f3.png?raw=true" width="100%" />
 
 2. 拓扑图
 
-   <img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/2b7eaa645f3c472a8321228e972b0206.png?raw=true" width="100%" />
+   <img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/2b7eaa645f3c472a8321228e972b0206.jpg?raw=true" width="100%" />
 
 3. 链路追踪
 
-<img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/9a1ccbe65ec04749ad77ed87cfcaaa38.png?raw=true" width="100%" />
+<img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/9a1ccbe65ec04749ad77ed87cfcaaa38.jpg?raw=true" width="100%" />
 
 4. 告警
 
-   <img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/0aede33b74a34424a6e32933076e765e.png?raw=true" width="100%" />
+   <img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/0aede33b74a34424a6e32933076e765e.jpg?raw=true" width="100%" />
+
+
+
+<h3>ELK</h3>
+
+<img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/eb5882eb43b645b5bc5f37f5c79a9538.jpg?raw=true" width="100%" />
