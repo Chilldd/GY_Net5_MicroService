@@ -17,7 +17,6 @@ namespace MicroService.SystemManage
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("≤‚ ‘");
             CreateHostBuilder(args).Build().Run();
         }
 

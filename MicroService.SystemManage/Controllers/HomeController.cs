@@ -100,32 +100,20 @@ namespace MicroService.SystemManage.Controllers
             try
             {
                 HttpClient httpClient = httpClientFactory.CreateClient("MicroService.SystemManage");
-                HttpResponseMessage response = await httpClient.GetAsync("http://192.168.1.2:10004/WeatherForecast");
+                var list = await service.GetServices("TaskCenter");
+                var serviceInfo = list.FirstOrDefault();
+                string url = $"http://{serviceInfo.Address}:{serviceInfo.Port}/WeatherForecast/get";
+                HttpResponseMessage response = await httpClient.GetAsync(url);
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     json = await response.Content.ReadAsStringAsync();
                 else
-                    logger.LogInformation("服务调用报错, msg: " + await response.Content.ReadAsStringAsync());
+                    logger.LogInformation("【SystemManage】服务调用报错, msg: " + await response.Content.ReadAsStringAsync());
 
-                logger.LogInformation("服务调用成功");
+                logger.LogInformation("【SystemManage】服务调用成功");
             }
             catch (Exception ex)
             {
-                logger.LogInformation("服务调用失败, ex: " + ex.Message);
-            }
-            try
-            {
-                HttpClient httpClient = httpClientFactory.CreateClient("MicroService.SystemManage");
-                HttpResponseMessage response = await httpClient.GetAsync("http://192.168.1.2:10004/WeatherForecast");
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    json = await response.Content.ReadAsStringAsync();
-                else
-                    logger.LogInformation("服务调用报错, msg: " + await response.Content.ReadAsStringAsync());
-
-                logger.LogInformation("服务调用成功2");
-            }
-            catch (Exception ex)
-            {
-                logger.LogInformation("服务调用失败, ex: " + ex.Message);
+                logger.LogInformation("【SystemManage】服务调用失败, ex: " + ex.Message);
             }
             return json;
         }
@@ -134,6 +122,19 @@ namespace MicroService.SystemManage.Controllers
         public void TestPushMessage()
         {
             capPublisher.Publish(EventBusConstants.SystemTest, $"发送时间: 【{DateTime.Now}】");
+        }
+
+        [HttpGet("testGC")]
+        public void TestGC()
+        {
+            for (int i = 0; i < int.MaxValue; i++)
+            {
+                string a = "";
+                for (int j = 0; j < 100000; j++)
+                {
+                    a += j.ToString();
+                }
+            }
         }
 
         [HttpGet("health")]

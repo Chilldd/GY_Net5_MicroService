@@ -1,42 +1,47 @@
+﻿此项目是我在学习微服务时写的练手项目，目前是最基本的实现，后续有时间会不断更新。
+
+
+
 ﻿﻿﻿## 功能模块:  
+
 - [x] 服务注册(Consul):  
-	  服务启动自动注册，服务关闭时自动下线
-	  注册，下线，获取服务: IServiceRegistryManage
+	   服务启动自动注册，服务关闭时自动下线
+	 注册，下线，获取服务: IServiceRegistryManage
 - [x] 网关(Ocelot):  
-	  Consul集成  
-	  服务调用负载均衡  
-	  限流  
-	  熔断  
-	  认证  
-	  聚合所有微服务Swagger  
-	  与配置中心集成  
+	   Consul集成  
+	 服务调用负载均衡  
+	 限流  
+	 熔断  
+	 认证  
+	 聚合所有微服务Swagger  
+	 与配置中心集成  
 - [x] 容错(Http):  
-	  熔断  
-	  重试  
-	  超时  
-	  资源隔离  
-	  与配置中心集成(通过在appsetting中配置)  
+	   熔断  
+	 重试  
+	 超时  
+	 资源隔离  
+	 与配置中心集成(通过在appsetting中配置)  
 
 - [x] 配置中心:  
-      使用Consul作为配置中心，可区分生产环境测试环境等
+   使用Consul作为配置中心，可区分生产环境测试环境等
 - [x] 日志中心(ELK集成):  
-	  简单集成已实现(log4net)
+	   简单集成已实现(log4net)
 - [x] 链路监控(Skywalking):  
-      链路监控(初版)
+    链路监控(初版)
 	  请求会话日志聚合(未完成)
 - [x] 事件总线(CAP):  
-	  RabbitMQ作为消息中间件
-	  Mysql作为消息存储
+	   RabbitMQ作为消息中间件
+	 Mysql作为消息存储
 	    
 
 - [x] Log:  
 	  Log4net: 记录物理日志  
-	  ELK: 待实现  
+	ELK: 每天记录一个index  
 - [x] 身份验证:  
 	  jwt方案: 认证，授权，获取用户信息 (ioc注入：IUserHelper)  
 - [x] IOC，AOP:  
 	  Autofac: 默认读取当前项目下所有的class注入 (配置文件中需要配置项目名称，可通过NotAOP，NotInject设置不注入，不走切面)  
-	  AOP:  
+	AOP:  
 		  日志切面: 通过配置文件控制是否开启, 方法需要是虚方法  
 		  事务切面: 通过配置文件控制是否开启, 方法需要是虚方法，并且添加特性[UseTran]  
 - [x] ORM: SqlSugar:  
@@ -104,3 +109,23 @@
 1. 聚合swagger文档
 
 <img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/image-20210830182856554.png?raw=true" width="100%" />
+
+<h3>链路监控</h3>
+
+1. 仪表盘
+
+<img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/00061c3133114592b68dd5ec3a682eca.png?raw=true" width="100%" />
+
+<img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/9965f3ccb1ef453885c3698e9887e1f3.png?raw=true" width="100%" />
+
+2. 拓扑图
+
+   <img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/2b7eaa645f3c472a8321228e972b0206.png?raw=true" width="100%" />
+
+3. 链路追踪
+
+<img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/9a1ccbe65ec04749ad77ed87cfcaaa38.png?raw=true" width="100%" />
+
+4. 告警
+
+   <img src="https://github.com/Chilldd/GY_Net5_MicroService/blob/master/img/0aede33b74a34424a6e32933076e765e.png?raw=true" width="100%" />

@@ -24,10 +24,12 @@ namespace MicroService.TaskCenter.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("get")]
         public IActionResult Get()
         {
             Console.WriteLine("Get------------------");
+            Thread.Sleep(1000);
+            _logger.LogInformation($"【TaskCenter】Get------------------【{DateTime.Now}】");
             return Ok();
         }
 
